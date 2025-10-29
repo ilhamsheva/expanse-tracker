@@ -34,6 +34,13 @@ Aplikasi web untuk melacak pengeluaran yang dibangun menggunakan React + Vite de
   - Styling konsisten dengan Tailwind
   - Props: value, onChange, label, placeholder, type
 
+- **`SelectField.jsx`** - Reusable select dropdown component dengan fitur:
+  - Native HTML select element
+  - Dynamic options dari props
+  - Styling konsisten dengan InputField
+  - Props: label, value, onChange, options
+  - Default option sebagai placeholder
+
 #### Layouts (`src/layouts/`)
 - **`AuthLayout.jsx`** - Layout wrapper untuk halaman autentikasi:
   - Header dengan title "Expense Tracker"
@@ -50,7 +57,12 @@ Aplikasi web untuk melacak pengeluaran yang dibangun menggunakan React + Vite de
   - Link navigasi ke halaman SignUp
   - Integration dengan validateEmail utility
 
-- **`SignUp.jsx`** - Halaman registrasi (placeholder, belum diimplementasi)
+- **`SignUp.jsx`** - Halaman registrasi dengan fitur:
+  - Form lengkap dengan first name, last name, email, password
+  - SelectField component untuk dropdown options
+  - Form validation untuk semua field termasuk select
+  - Error handling dan display
+  - Link navigasi ke halaman Login
 
 ##### Dashboard Pages (`src/pages/Dashboard/`)
 - **`Home.jsx`** - Halaman dashboard utama (placeholder, belum diimplementasi)
@@ -91,22 +103,25 @@ Aplikasi web untuk melacak pengeluaran yang dibangun menggunakan React + Vite de
 - Login page dengan validasi
 - Reusable InputField component
 - Email validation utility
+- **[2025-10-28]** Login page dengan validasi dan InputField component
+- **[2025-10-29]** SelectField component implementation
+- **[2025-10-29]** SignUp page dengan form validation lengkap
 
 ### 🔄 In Progress
-- Login form submit functionality (button di luar form)
-- Authentication logic
+- Authentication logic dan API integration
+- Dashboard functionality
 
 ### 📋 Todo
-- SignUp page implementation
 - Dashboard/Home page functionality
 - API integration untuk autentikasi
 - Expense tracking features
 - Data persistence (localStorage/database)
+- Form submission handling untuk SignUp
 
 ## 🐛 Known Issues
 
-1. **Login Form**: Button submit berada di luar form element, sehingga handleLogin tidak terpanggil
-2. **Font Loading**: Memerlukan restart development server setelah konfigurasi Tailwind
+1. **Font Loading**: Memerlukan restart development server setelah konfigurasi Tailwind
+2. **SelectField**: Resolved React hooks conflict dengan native HTML select
 
 ## 📦 Installation & Setup
 
@@ -123,8 +138,14 @@ npm run build
 
 ## 🎯 Next Steps
 
-1. Perbaiki struktur form di Login.jsx
-2. Implementasi SignUp functionality
-3. Tambahkan authentication state management
-4. Buat dashboard untuk expense tracking
-5. Integrasikan dengan backend API
+1. Implementasi form submission untuk SignUp
+2. Tambahkan authentication state management
+3. Buat dashboard untuk expense tracking
+4. Integrasikan dengan backend API
+5. Tambahkan loading states dan better UX
+
+## 📅 Development Log
+
+- **2025-10-29**: Implementasi SelectField component dan SignUp form validation
+- **2025-10-28**: Setup project, Login page, InputField component dengan password toggle
+- **Initial**: Project setup dengan Vite + React + Tailwind CSS
