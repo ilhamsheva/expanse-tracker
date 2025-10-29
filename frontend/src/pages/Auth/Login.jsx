@@ -19,6 +19,9 @@ const Login = () => {
     if (!password) {
       setError("Password is required");
       return;
+    } else if (password.length < 8) {
+      setError("Password at least 8 character");
+      return;
     }
 
     setError("");
@@ -26,7 +29,7 @@ const Login = () => {
 
   return (
     <AuthLayout>
-      <div className="md:w-full w-h-full h-3/4 md:h-full flex flex-col justify-center">
+      <div className="md:w-full w-full h-3/4 md:h-full flex flex-col justify-center">
         <h2 className="text-xl font-semibold">Welcome Back</h2>
         <p className="text-xs text-slate-600 mt-[5px] mb-6">
           Please enter detail you login
