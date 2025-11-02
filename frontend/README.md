@@ -106,22 +106,39 @@ Aplikasi web untuk melacak pengeluaran yang dibangun menggunakan React + Vite de
 - **[2025-10-28]** Login page dengan validasi dan InputField component
 - **[2025-10-29]** SelectField component implementation
 - **[2025-10-29]** SignUp page dengan form validation lengkap
+- **[2025-01-XX]** Backend setup lengkap dengan Node.js + Express
+- **[2025-01-XX]** Database configuration dengan MongoDB Atlas
+- **[2025-01-XX]** User authentication system dengan JWT
+- **[2025-01-XX]** Password hashing dengan bcryptjs
+- **[2025-01-XX]** Environment variables configuration
+- **[2025-01-XX]** API routes untuk auth (register, login, getUserInfo)
+- **[2025-01-XX]** Middleware untuk JWT protection
+- **[2025-01-XX]** User model dengan Mongoose schema
+- **[2025-01-XX]** CORS configuration untuk frontend-backend communication
+- **[2025-01-XX]** Tailwind CSS v3 migration dan @apply directive fixes
 
 ### 🔄 In Progress
-- Authentication logic dan API integration
+- Frontend-backend integration
+- Form submission handling untuk authentication
 - Dashboard functionality
 
 ### 📋 Todo
+- Connect frontend forms dengan backend API
 - Dashboard/Home page functionality
-- API integration untuk autentikasi
 - Expense tracking features
-- Data persistence (localStorage/database)
-- Form submission handling untuk SignUp
+- Error handling improvement
+- Loading states dan better UX
 
-## 🐛 Known Issues
+## 🐛 Known Issues & Fixes
 
-1. **Font Loading**: Memerlukan restart development server setelah konfigurasi Tailwind
-2. **SelectField**: Resolved React hooks conflict dengan native HTML select
+1. **Font Loading**: Memerlukan restart development server setelah konfigurasi Tailwind ✅ Fixed
+2. **SelectField**: Resolved React hooks conflict dengan native HTML select ✅ Fixed
+3. **Tailwind @apply**: Fixed compatibility issues dengan v4 → v3 migration ✅ Fixed
+4. **JWT Secret**: Generated secure random secret untuk production ✅ Fixed
+5. **Import/Export**: Fixed ES6 module consistency di backend ✅ Fixed
+6. **Database Connection**: Fixed import path untuk db.js ✅ Fixed
+7. **User Model**: Fixed bcrypt typo dan export statement ✅ Fixed
+8. **Auth Controller**: Fixed async/await dan response syntax errors ✅ Fixed
 
 ## 📦 Installation & Setup
 

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import AuthLayout from "../../layouts/AuthLayout";
 import validateEmail from "../../validate/validateEmail";
 import SelectField from "../../components/SelectField";
+import UploadFields from "../../components/UploadFields";
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");
@@ -51,6 +52,9 @@ const SignUp = () => {
 
         {/* Form untuk signup */}
         <form onSubmit={handleSignUp}>
+
+          <UploadFields/>
+          
           <div className="separate-form">
             <InputField
               label="First Name"
