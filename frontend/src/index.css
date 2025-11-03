@@ -34,6 +34,3 @@
   @apply w-full flex justify-between gap-3 text-sm text-black bg-slate-100 rounded px-4 py-3 mb-4 mt-3 border border-slate-200 outline-none;
 }
 
-.select-badge {
-  @apply group pointer-events-none absolute top-2.5 right-2.5 size-4 fill-white/60
-}
