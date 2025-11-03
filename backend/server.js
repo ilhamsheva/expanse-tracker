@@ -10,13 +10,17 @@ const app = express();
 
 // Middleware for cors
 app.use(cors({
-    origin: process.env || '*',
+    origin: '*',
     allowedHeaders: ['Content-Type', 'Authorization'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
 }));
 
 // Middleware for parsing JSON
 app.use(express.json());
+
+// Serve static files from uploads directory
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 const port = process.env.PORT || 3000;
 
