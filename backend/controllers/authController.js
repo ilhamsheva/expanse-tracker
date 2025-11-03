@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import upload from '../middleware/uploadMiddleware.js';
 
 // generate JWT
 const generateToken = (id) => {
@@ -9,7 +10,7 @@ const generateToken = (id) => {
 };
 
 export const registerUser = async (req, res) => {
-    const {firstName, lastName, gender, email, password} = req.body;
+    const {profilePhoto, firstName, lastName, gender, email, password} = req.body;
 
     // Validation
     if (!firstName || !gender || !email || !password) {
@@ -25,6 +26,7 @@ export const registerUser = async (req, res) => {
 
         // Create user
         const user = await User.create({
+            profilePhoto,
             firstName,
             lastName,
             gender,
@@ -86,4 +88,12 @@ export const getUserInfo = async (req, res) => {
             message: 'Error registering user', error: e.message
         });
     }
+}
+
+export const uploadImage = (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ message: 'No file uploaded' }); 
+    }
+    const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+    res.status(200).json({ imageUrl });
 }
