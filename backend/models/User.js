@@ -3,6 +3,11 @@ import bcrypt from 'bcryptjs';
 
 const UserSchema = new mongoose.Schema(
     {
+        profilePhoto: {
+            type: String,
+            required: [false],
+            default: ""
+        },
         firstName: {
             type: String,
             required: [true, 'Please add a first name'],
