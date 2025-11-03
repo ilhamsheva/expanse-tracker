@@ -163,6 +163,20 @@ Aplikasi web untuk melacak pengeluaran yang dibangun menggunakan React + Vite de
 ### 🔄 In Progress
 - SignUp API integration
 - Profile photo upload integration di frontend
+- **[2025-01-XX]** Backend setup lengkap dengan Node.js + Express
+- **[2025-01-XX]** Database configuration dengan MongoDB Atlas
+- **[2025-01-XX]** User authentication system dengan JWT
+- **[2025-01-XX]** Password hashing dengan bcryptjs
+- **[2025-01-XX]** Environment variables configuration
+- **[2025-01-XX]** API routes untuk auth (register, login, getUserInfo)
+- **[2025-01-XX]** Middleware untuk JWT protection
+- **[2025-01-XX]** User model dengan Mongoose schema
+- **[2025-01-XX]** CORS configuration untuk frontend-backend communication
+- **[2025-01-XX]** Tailwind CSS v3 migration dan @apply directive fixes
+
+### 🔄 In Progress
+- Frontend-backend integration
+- Form submission handling untuk authentication
 - Dashboard functionality
 - Protected routes implementation
 
@@ -176,6 +190,11 @@ Aplikasi web untuk melacak pengeluaran yang dibangun menggunakan React + Vite de
 - File size validation
 - Protected routes dengan authentication check
 - Logout functionality
+- Connect frontend forms dengan backend API
+- Dashboard/Home page functionality
+- Expense tracking features
+- Error handling improvement
+- Loading states dan better UX
 
 ## 🐛 Known Issues & Fixes
 
