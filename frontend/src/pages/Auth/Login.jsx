@@ -13,7 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  const { updateUser } = useContext(UserContext);
+  const { updateUserData } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -45,7 +45,7 @@ const Login = () => {
 
       if (token) {
         localStorage.setItem("token", token);
-        updateUser(user);
+        updateUserData(user);
         navigate("/home");
       }
     } catch (e) {
