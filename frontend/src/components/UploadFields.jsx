@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
 import { LuUser, LuUpload, LuTrash } from "react-icons/lu";
 
-const UploadFields = ({ image, setImage }) => {
+const UploadFields = () => {
   const inputRef = useRef(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [image, setImage] = useState(null);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -25,6 +26,7 @@ const UploadFields = ({ image, setImage }) => {
   const onChooseFile = () => {
     inputRef.current.click();
   };
+  
   return (
     <div className="flex justify-center mb-6">
       <input
@@ -41,7 +43,7 @@ const UploadFields = ({ image, setImage }) => {
 
           <button
             type="button"
-            className="absolute h-8 w-8 items-center justify-center bg-green-200 text-white rounded-full"
+            className="h-8 w-8 items-center justify-center pl-2 bg-green-400 text-white font-semibold rounded-full absolute -right-1 -bottom-1"
             onClick={onChooseFile}
           >
             <LuUpload />
@@ -56,7 +58,7 @@ const UploadFields = ({ image, setImage }) => {
           />
 
           <button
-            className="h-8 w-8 flex items-center justify-center bg-red-500 text-white rounded-full absolute -right-1 -bottom-1"
+            className="h-8 w-8 flex items-center justify-center ml-2 bg-red-500 font-semibold text-white rounded-full absolute -right-1 -bottom-1"
             type="button"
             onClick={handleRemoveImage}
           >
