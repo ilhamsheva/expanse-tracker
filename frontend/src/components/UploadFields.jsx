@@ -1,10 +1,9 @@
 import { useRef, useState } from "react";
 import { LuUser, LuUpload, LuTrash } from "react-icons/lu";
 
-const UploadFields = () => {
+const UploadFields = ({ image, setImage }) => {
   const inputRef = useRef(null);
   const [previewUrl, setPreviewUrl] = useState(null);
-  const [image, setImage] = useState(null);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
