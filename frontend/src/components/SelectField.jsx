@@ -1,4 +1,4 @@
-const SelectField = ({ label, value, onChange, options = [] }) => {
+const SelectField = ({ label, value, onChange, gender = [] }) => {
   return (
     <div>
       <label className="text-[14px] text-slate-600">{label}</label>
@@ -10,7 +10,7 @@ const SelectField = ({ label, value, onChange, options = [] }) => {
           className="w-full bg-transparent outline-none"
         >
           <option value="">Select an option</option>
-          {options.map((option) => (
+          {gender.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>

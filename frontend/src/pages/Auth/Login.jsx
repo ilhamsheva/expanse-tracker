@@ -77,7 +77,7 @@ const Login = () => {
           <InputField
             value={password}
             onChange={({ target }) => setPassword(target.value)}
-            label="Password Address"
+            label="Password"
             placeholder="Enter your password"
             type="password"
           />
