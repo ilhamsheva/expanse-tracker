@@ -5,6 +5,7 @@ import cors from 'cors';
 import path from 'path';
 import connectDatabase from './config/db.js';
 import authRoutes from './routes/authRoutes.js'
+import incomeRoutes from './routes/incomeRoutes.js'
 
 const app = express();
 
@@ -29,6 +30,7 @@ connectDatabase();
 
 // Routes
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v2/income', incomeRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
