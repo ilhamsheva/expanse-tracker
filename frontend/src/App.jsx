@@ -8,6 +8,8 @@ import Login from "./pages/Auth/Login";
 import SignUp from "./pages/Auth/SignUp";
 import Home from "./pages/Dashboard/Home";
 import UserProvider from "./context/UserContext";
+import Income from "./pages/Dashboard/Income";
+import Expense from "./pages/Dashboard/Expense";
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
             <Route path="/login" exact element={<Login />} />
             <Route path="/signup" exact element={<SignUp />} />
             <Route path="/home" exact element={<Home />} />
+            <Route path="/income" exact element={<Income />} />
+            <Route path="/expanse" exact element={<Expense />} />
           </Routes>
         </Router>
       </div>
