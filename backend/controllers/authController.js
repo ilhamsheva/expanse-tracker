@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import upload from "../middleware/uploadMiddleware.js";
+import path from "path";
+import fs from "fs";
 
 // generate JWT
 const generateToken = (id) => {
@@ -113,12 +115,38 @@ export const updateImage = async (req, res) => {
   }
 
   try {
-    const updatedUser = await User.findByIdAndUpdate(userId, {profilePhoto}).select("-password");
-    if (!updatedUser) {
-      return res.status(404).json({message: 'User not found'});
+    const currentUser = await User.findById({ userId }).select("-password");
+
+    if (!currentUser) {
+      return res.status(404).json({ message: "Current user not defined" });
     }
 
-    res.status(200).json({message: 'Update image successfully', user: updatedUser})
+    // Jika tidak ada fotonya dan foto saat ini
+    if (profilePhoto === null && currentUser.profilePhoto) {
+      // Ekstrak file lama
+      const oldPhotoUrl = currentUser.profilePhoto;
+      const filename = path.basename(oldPhotoUrl);
+      const filePath = path.join("/uploads", filename);
+
+      // Hapus file fisik
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { profilePhoto },
+      {new: true},
+    ).select("-password");
+    
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res
+      .status(200)
+      .json({ message: "Update image successfully", user: updatedUser });
   } catch (error) {
     res.status(500).json({ message: "Error updating image" });
   }
