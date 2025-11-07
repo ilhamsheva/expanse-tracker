@@ -1,20 +1,33 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import InputField from "../../components/InputField";
 import { Link } from "react-router-dom";
 import AuthLayout from "../../layouts/AuthLayout";
 import validateEmail from "../../validate/validateEmail";
 import SelectField from "../../components/SelectField";
+import UploadFields from "../../components/UploadFields";
+import axiosInstance from "../../utils/axios";
+import { UserContext } from "../../context/UserContext";
+import { API_PATH } from "../../utils/apiPath";
+import uploadImage from "../../utils/uploadImage";
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [options, setOptions] = useState("");
+  const [gender, setGender] = useState("");
   const [error, setError] = useState(null);
+
+  const [profilePic, setProfilePic] = useState(null);
+
+  const { updateUserData } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+
+    let profilePhoto = "";
 
     if (!firstName) {
       setError("Please enter your first name");
@@ -34,12 +47,43 @@ const SignUp = () => {
       return;
     }
 
-    if (!options) {
+    if (!gender) {
       setError("Please select an option");
       return;
     }
 
     setError("");
+
+    // Signup API Call
+    try {
+      if (profilePic) {
+        const imgUploadRes = await uploadImage(profilePic);
+        profilePhoto = imgUploadRes.imageUrl || "";
+      }
+      
+      const response = await axiosInstance.post(API_PATH.AUTH.SIGNUP, {
+        firstName,
+        lastName,
+        gender,
+        email,
+        password,
+        profilePhoto
+      });
+
+      const { token, user } = response.data;
+
+      if (token) {
+        localStorage.setItem("token", token);
+        updateUserData(user);
+        navigate("/home");
+      }
+    } catch (e) {
+      if (e.response && e.response.data.message) {
+        setError(e.response.data.message);
+      } else {
+        setError("Something went wrong");
+      }
+    }
   };
   return (
     <AuthLayout>
@@ -51,6 +95,11 @@ const SignUp = () => {
 
         {/* Form untuk signup */}
         <form onSubmit={handleSignUp}>
+          <UploadFields 
+            image={profilePic}
+            setImage={setProfilePic}
+          />
+
           <div className="separate-form">
             <InputField
               label="First Name"
@@ -71,12 +120,12 @@ const SignUp = () => {
 
           <SelectField
             label="Gender"
-            value={options}
-            onChange={({ target }) => setOptions(target.value)}
-            options={[
+            value={gender}
+            onChange={({ target }) => setGender(target.value)}
+            gender={[
               { value: "male", label: "Male" },
               { value: "female", label: "Female" },
-              {value: "other", label: "Other"}
+              { value: "other", label: "Other" },
             ]}
           />
 

@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthLayout from "../../layouts/AuthLayout";
 import InputField from "../../components/InputField";
 import validateEmail from "../../validate/validateEmail";
+import axiosInstance from "../../utils/axios";
+import { API_PATH } from "../../utils/apiPath";
+import { UserContext } from "../../context/UserContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+
+  const { updateUserData } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,6 +33,28 @@ const Login = () => {
     }
 
     setError("");
+
+    // Login API Call
+    try {
+      const response = await axiosInstance.post(API_PATH.AUTH.LOGIN, {
+        email,
+        password,
+      });
+
+      const { token, user } = response.data;
+
+      if (token) {
+        localStorage.setItem("token", token);
+        updateUserData(user);
+        navigate("/home");
+      }
+    } catch (e) {
+      if (e.response && e.response.data.message) {
+        setError(e.response.data.message);
+      } else {
+        setError("Something went wrong");
+      }
+    }
   };
 
   return (
@@ -47,7 +77,7 @@ const Login = () => {
           <InputField
             value={password}
             onChange={({ target }) => setPassword(target.value)}
-            label="Password Address"
+            label="Password"
             placeholder="Enter your password"
             type="password"
           />
