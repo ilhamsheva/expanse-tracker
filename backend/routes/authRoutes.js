@@ -11,5 +11,4 @@ router.get('/getUser', protect, getUserInfo);
 // route for upload photo
 router.post('/upload-image', upload.single('image'), uploadImage);
 router.put('/update-image:id', protect, updateImage)
-
 export default router;
