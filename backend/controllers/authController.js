@@ -107,7 +107,7 @@ export const uploadImage = (req, res) => {
 };
 
 export const updateImage = async (req, res) => {
-  const userId = req.user.id;
+  const userId = req.user>_id;
   const { profilePhoto } = req.body;
 
   if (!profilePhoto) {
