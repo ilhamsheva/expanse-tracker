@@ -14,7 +14,7 @@ import Expense from "./pages/Dashboard/Expense";
 const App = () => {
   return (
     <UserProvider>
-      <div className="flex justify-center">
+      <div>
         <Router>
           <Routes>
             <Route path="/" element={<Root />} />

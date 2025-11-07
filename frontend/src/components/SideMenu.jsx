@@ -6,6 +6,7 @@ import { SIDE_MENU } from "../utils/data";
 import CharAvatar from "./CharAvatar";
 import uploadImage from "../utils/uploadImage";
 import { LuUpload, LuTrash } from "react-icons/lu";
+import { updateProfileImage } from "../utils/updateProfileImage";
 
 const SideMenu = ({ activeMenu }) => {
   const { user, clearUser, updateUserData } = useContext(UserContext);
@@ -35,22 +36,31 @@ const handleUpload = useMemo(() => async (event) => {
 
   setIsUploading(true);
   try {
+    // Upload image
     const response = await uploadImage(file);
-    const updateUser = { ...user, profilePhoto: response.imageUrl };
-    updateUserData(updateUser);
-    localStorage.setItem("user", JSON.stringify(updateUser));
+
+    // Update database
+    const updatedResponse = await updateProfileImage({profilePhoto: response.imageUrl});
+
+    // 3. Update context & localStorage
+    updateUserData(updatedResponse.user);
+    localStorage.setItem("user", JSON.stringify(updatedResponse.user));
+
   } catch (error) {
     console.error("Error uploading photo", error);
   } finally {
     setIsUploading(false);
   }
-}, [user, updateUserData]);
+}, [updateUserData]);
 
-const handleRemoveImage = useMemo(() => () => {
-  const updateUser = { ...user, profilePhoto: null };
-  updateUserData(updateUser);
-  localStorage.setItem("user", JSON.stringify(updateUser));
-}, [user, updateUserData]);
+const handleRemoveImage = useMemo(() => async () => {
+  // Update database
+  const updatedResponse = await updateProfileImage({profilePhoto: null});
+
+   // 2. Update context & localStorage
+  localStorage.setItem("user", JSON.stringify(updatedResponse.user));
+  updateUserData(updatedResponse.user);
+}, [updateUserData]);
 
 
   const triggerFileInput = () => {
