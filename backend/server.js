@@ -7,6 +7,7 @@ import connectDatabase from './config/db.js';
 import authRoutes from './routes/authRoutes.js'
 import incomeRoutes from './routes/incomeRoutes.js'
 import expenseRoutes from './routes/expenseRoutes.js'
+import dashboardRoutes from './routes/dashboardRoutes.js'
 
 const app = express();
 
@@ -33,6 +34,7 @@ connectDatabase();
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v2/income', incomeRoutes);
 app.use('/api/v3/expense', expenseRoutes);
+app.use('/api/v4/dashboard', dashboardRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
