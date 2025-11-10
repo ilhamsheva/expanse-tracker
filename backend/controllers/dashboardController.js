@@ -56,23 +56,19 @@ export const getDashboardData = async (req, res) => {
 
     // Fetch 7 last data income and expanse
     const lastTransactions = [
-      ...[
-        (await Income.find({ userId }).sort({ date: -1 }).limit(7)).map(
-          (item) => ({
-            ...item.toObject(),
-            type: "income",
-          })
-        ),
-      ],
+      ...(await Income.find({ userId }).sort({ date: -1 }).limit(7)).map(
+        (item) => ({
+          ...item.toObject(),
+          type: "income",
+        })
+      ),
 
-      ...[
-        (await Expense.find({ userId }).sort({ date: -1 }).limit(7)).map(
-          (item) => ({
-            ...item.toObject(),
-            type: "expense",
-          })
-        ),
-      ],
+      ...(await Expense.find({ userId }).sort({ date: -1 }).limit(7)).map(
+        (item) => ({
+          ...item.toObject(),
+          type: "expense",
+        })
+      ),
     ]
       .sort((a, b) => b.date - a.date)
       .slice(0, 7);
