@@ -6,9 +6,14 @@ import axiosInstance from "../../utils/axios";
 import InfoCard from "../../cards/InfoCard";
 import { separatorThousand } from "../../helper/separatorThousand";
 import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
+import { IoMdCard } from "react-icons/io";
+import RecentTransaction from "../../cards/RecentTransaction";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   useAuth();
+
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
   const [dashboardData, setDashboardData] = useState(null);
@@ -53,7 +58,15 @@ const Home = () => {
             icon={<LuHandCoins />}
             label="Total Expenses"
             color="bg-red-500"
-            value={separatorThousand(dashboardData?.totalExpenses || 0)}
+            value={separatorThousand(dashboardData?.totalExpense || 0)}
+          />
+        </div>
+
+        <div className="mt-5">
+          <RecentTransaction
+            lastTransactions7Days={dashboardData?.lastTransactions7Days || []}
+            label="Recent Transaction"
+            onSeeMore={() => navigate("/expense")}
           />
         </div>
       </div>
