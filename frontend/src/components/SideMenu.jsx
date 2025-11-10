@@ -122,7 +122,7 @@ const handleRemoveImage = useMemo(() => async () => {
           )}
         </div>
 
-        <h5 className="text-shadow-gray-950 font-medium leading-6 mb-2">
+        <h5 className="text-shadow-gray-950 font-medium leading-6 mb-6">
           {fullName}
         </h5>
       </div>
@@ -132,7 +132,7 @@ const handleRemoveImage = useMemo(() => async () => {
           key={item.id}
           onClick={() => handleClick(item.path)}
           className={`w-full flex items-center gap-4 text-[15px] ${
-            activeMenu == item.label ? "text-white bg-green-400" : ""
+            activeMenu == item.label ? "" : "text-white bg-green-400"
           } py-3 px-6 rounded-lg mb-3`}
         >
           <item.icon className="text-xl" />
