@@ -9,6 +9,7 @@ import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 import { IoMdCard } from "react-icons/io";
 import RecentTransaction from "../../cards/RecentTransaction";
 import { useNavigate } from "react-router-dom";
+import FinanceOverview from "../../cards/FinanceOverview";
 
 const Home = () => {
   useAuth();
@@ -67,6 +68,12 @@ const Home = () => {
             lastTransactions7Days={dashboardData?.lastTransactions7Days || []}
             label="Recent Transaction"
             onSeeMore={() => navigate("/expense")}
+          />
+
+          <FinanceOverview
+            totalBalance={dashboardData?.totalBalance || 0}
+            totalIncome={dashboardData?.totalIncome || 0}
+            totalExpense={dashboardData?.totalExpense || 0}
           />
         </div>
       </div>
